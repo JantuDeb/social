@@ -1,0 +1,17 @@
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    outline: 3px solid var(--color-light);
+    background-color: var(--color-light);
+}
+
+.input:focus {
+    outline: 3px solid var(--color-light);
+    color: var(--color-dark);
+    border: 1px solid transparent;
+}
