@@ -1,0 +1,38 @@
+.conatiner {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.links {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.links a {
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    margin-bottom: 0.6rem;
+
+}

@@ -1,0 +1,81 @@
+.post {
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin: 1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+}
+
+.profileImg {
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.media {
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    margin: 0.7rem 0;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.actionButtonRight {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    color: var(--color-primary);
+}
+
+.tags>*::before {
+    content: "#";
+
+}
+
+.searchBar {
+    display: flex;
+    background-color: var(--color-light);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    color: var(--color-dark);
+}
+
+.inputSearch {
+    background-color: transparent;
+    color: var(--color-dark);
+    width: 100%;
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.description{
+    padding: 0.5rem 0;
+}
