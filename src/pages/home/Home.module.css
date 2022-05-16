@@ -1,0 +1,29 @@
+main {
+    position: relative;
+    top: 5rem;
+}
+
+.container {
+    width: 85%;
+    display: grid;
+    grid-template-columns: 2fr 5.5fr 3fr;
+    column-gap: 2rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 96%;
+        grid-template-columns: 5rem auto 30vw;
+        column-gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .container {
+        width: 96%;
+        grid-template-columns: 5rem auto 0;
+        column-gap: 1rem;
+    }
+}
