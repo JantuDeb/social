@@ -1,0 +1,58 @@
+.signIn {}
+
+.title {
+    font-size: 2.2rem;
+    color: var(--color-dark);
+    margin-bottom: 0.6rem;
+}
+
+.inputBox {
+    max-width: 20rem;
+    width: 100%;
+    height: 3.5rem;
+    background-color: var(--color-white);
+    margin: 1rem 0;
+    border-radius: 3.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    position: relative;
+}
+
+.inputBox svg {
+    width: 3rem;
+    text-align: center;
+    color: var(--color-gray);
+}
+
+.inputBox input {
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+}
+
+.signUp button{
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.socialText{
+    padding: 0.7rem 0;
+}
+
+.social{
+    display: flex;
+    gap: 1rem;
+    color: var(--color-dark);
+}
+
+.social svg{
+    border: 1px solid var(--color-dark);
+    padding: 0.3rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.social svg:hover{
+    color: var(--color-primary);
+}
