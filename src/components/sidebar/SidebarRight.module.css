@@ -1,0 +1,130 @@
+.right {
+    position: sticky;
+    height: calc(100vh - 5rem);
+    overflow-y: auto;
+    top: 5rem;
+    bottom: 0;
+}
+
+.message {
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin-bottom: 1rem;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.searchBar {
+    display: flex;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+    font-size: 0.9rem;
+    align-items: center;
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+
+.inputSearch {
+    background-color: transparent;
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.category {
+    width: 100%;
+    text-align: center;
+    border-bottom: 4px solid var(--color-light);
+    padding-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.activeCategory {
+    border-color: 4px solid var(--color-dark);
+}
+
+.profile {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+}
+
+.profileImg {
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.peoples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.people {
+    padding: 0.5rem 0rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.requests {
+    display: flex;
+    flex-direction: column;
+}
+
+.request {
+    margin-top: 1rem;
+    background-color: var(--color-white);
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--card-border-radius);
+}
+
+
+.heading {
+    margin: 0.5rem 0;
+    color: var(--color-gray);
+}
+
+.actionButton {
+    display: flex;
+    margin: 0.5rem 1rem;
+    gap: 1rem;
+    align-items: center;
+}
+
+.profileHandle{
+    gap: 0.5rem;
+}
+
+.profileHandle h4{
+    white-space: nowrap;
+}
+
+
+/* @media screen and (max-width: 840px) {
+    .right{
+         display: none; 
+    }
+   
+} */

@@ -1,0 +1,53 @@
+.header{
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 0.7rem 0;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.container{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.searchBar{
+    display: flex;
+    background-color: var(--color-light);
+    border-radius: var(--border-radius);
+    padding: var(--search-padding);
+    width: 30vw;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+}
+
+.inputSearch{
+    background-color: transparent;
+    color: var(--color-dark);
+    width: 30vw;
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.profileImg{
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.create{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media screen and (max-width: 840px) {
+    .container {
+        width: 96%;
+    }
+}
