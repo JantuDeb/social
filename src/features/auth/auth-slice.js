@@ -24,6 +24,17 @@ export const login = createAsyncThunk("auth/login", async (user) => {
   }
 });
 
+export const logout = createAsyncThunk("auth/logout", async () => {
+  try {
+    const { data } = await axios.get("/logout", axiosConfig);
+    if (data.success) {
+      return {};
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+});
+
 export const signup = createAsyncThunk("auth/signup", async (user) => {
   try {
     const { data } = await axios.post("/signup", user, axiosConfig);
@@ -80,6 +91,11 @@ export const authState = createSlice({
     [login.pending]: (state, action) => {
       state.loginStatus = "loading";
     },
+    [logout.fulfilled]: (state, action) => {
+      state.loginStatus = "idle";
+      state.isLoggedIn = false;
+      state.user = action.payload;
+    },
     [updateProfile.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.updateProfileStatus = "succeeded";
@@ -93,13 +109,14 @@ export const authState = createSlice({
 
     [signup.fulfilled]: (state, action) => {
       state.user = action.payload;
-      state.signUpStatus = "succeeded"
+      state.isLoggedIn = true;
+      state.signUpStatus = "succeeded";
     },
     [signup.pending]: (state, action) => {
       state.signUpStatus = "loading";
     },
     [signup.rejected]: (state, action) => {
-      state.signUpStatus = "failed"
+      state.signUpStatus = "failed";
     },
     [getUser.fulfilled]: (state, action) => {
       state.userProfileData = action.payload;
