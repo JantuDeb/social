@@ -18,23 +18,23 @@ export const SidebarLeft = () => {
       path: "/home/discover",
       icon: <MdOutlinePeopleAlt size={18} />,
     },
-    {
-      title: "Chats",
-      path: "/home/chats",
-      icon: <BiEnvelope size={18} />,
-      count: true,
-    },
+    // {
+    //   title: "Chats",
+    //   path: "/home/chats",
+    //   icon: <BiEnvelope size={18} />,
+    //   count: true,
+    // },
     {
       title: "Bookmarks",
       path: "/home/bookmarks",
       icon: <BsFillJournalBookmarkFill size={18} />,
     },
-    { title: "Theme", path: "/home/theme", icon: <RiPaletteLine size={18} /> },
-    {
-      title: "Settings",
-      path: "/home/settings",
-      icon: <AiOutlineSetting size={18} />,
-    },
+    // { title: "Theme", path: "/home/theme", icon: <RiPaletteLine size={18} /> },
+    // {
+    //   title: "Settings",
+    //   path: "/home/settings",
+    //   icon: <AiOutlineSetting size={18} />,
+    // },
   ];
   return (
     <aside className={styles.left}>

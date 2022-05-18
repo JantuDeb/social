@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFeed, selectFeed } from "../../features/post/post-slice";
 import { Post } from "../post/Post";
-import { Stories } from "../stories/Stories";
+// import { Stories } from "../stories/Stories";
 import styles from "./Feed.module.css";
 import { PostForm } from "../forms/PostForm";
 export const Feed = () => {
@@ -14,7 +14,7 @@ export const Feed = () => {
   const feeds = useSelector(selectFeed)
   return (
     <section className={styles.container}>
-      <Stories />
+      {/* <Stories /> */}
       <PostForm />
       <div className={styles.feed}>
         {feeds.map((post) => {
