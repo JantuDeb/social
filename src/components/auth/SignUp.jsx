@@ -34,7 +34,7 @@ export const SignUp = () => {
   return (
     <form className={styles.signUp}>
       <div className={styles.inputBox}>
-        <IoMailOpenOutline />
+        <FaUser />
         <input
           name="username"
           value={userData.username}
