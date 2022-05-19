@@ -29,7 +29,7 @@ export const SidebarLeft = () => {
       path: "/home/bookmarks",
       icon: <BsFillJournalBookmarkFill size={18} />,
     },
-    // { title: "Theme", path: "/home/theme", icon: <RiPaletteLine size={18} /> },
+    { title: "Theme", path: "/home/theme", icon: <RiPaletteLine size={18} /> },
     // {
     //   title: "Settings",
     //   path: "/home/settings",

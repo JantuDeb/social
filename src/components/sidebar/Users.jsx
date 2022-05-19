@@ -1,10 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./SidebarRight.module.css";
-export const Users = ({data = [], isFollowing, handleClick}) => {
+export const Users = ({ data = [], isFollowing, handleClick }) => {
   return data.map((user) => {
     const following = isFollowing(user.followers);
     return (
-      <div key={user._id} className={styles.request}>
+      <Link
+        key={user._id}
+        to={`/home/profile/${user._id}`}
+        className={styles.request}
+      >
         <div className={styles.profile}>
           <div className={styles.profileImg}>
             <img src={user.photo.secure_url} alt="profile" />
@@ -16,11 +21,14 @@ export const Users = ({data = [], isFollowing, handleClick}) => {
         </div>
         <button
           className="btn btn-primary"
-          onClick={() => handleClick(user._id, following)}
+          onClick={(e) =>{
+            e.preventDefault()
+            handleClick(user._id, following)
+          }}
         >
           {following ? "Unfollow" : "Follow"}
         </button>
-      </div>
+      </Link>
     );
   });
 };
