@@ -5,18 +5,18 @@ import { FaHashtag } from "react-icons/fa";
 import { GrEmoji } from "react-icons/gr";
 import Input from "../shared/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../../features/post/post-slice";
+import { createPost, editPost } from "../../features/post/post-slice";
 import Button from "../loader/Button";
 import EmojiPicker from "emoji-picker-react";
 
-export const PostForm = () => {
+export const PostForm = ({ post = {}, closeModal, editing }) => {
   const initialState = {
-    description: "",
+    description: post?.description || "",
     image: "",
-    tags: [],
+    tags: post?.tags || [],
   };
   const [postData, setPostData] = useState(initialState);
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState(post?.image?.url || "");
   const [tag, setTag] = useState("");
   const [showInputTag, setShowInputTag] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
@@ -34,6 +34,7 @@ export const PostForm = () => {
   };
 
   const addTag = () => {
+    if (!tag) return;
     setPostData({ ...postData, tags: [...postData.tags, tag] });
     setTag("");
     setShowInputTag(false);
@@ -43,7 +44,7 @@ export const PostForm = () => {
     setPostData((data) => ({ ...data, description: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(postData).forEach(([key, value]) => {
@@ -56,7 +57,12 @@ export const PostForm = () => {
       }
     });
     try {
-      dispatch(createPost(formData)).unwrap();
+      if (editing) {
+        await dispatch(editPost({ post: formData, postId: post._id })).unwrap();
+        closeModal(false);
+      } else {
+        await dispatch(createPost(formData)).unwrap();
+      }
       setPostData(initialState);
       setImgUrl("");
     } catch (error) {
@@ -119,11 +125,11 @@ export const PostForm = () => {
           <div className={styles.fileInput}>
             <input
               type="file"
-              id="file"
+              id={editing ? "image" : "file"}
               className={styles.file}
               onChange={imageFileHandler}
             />
-            <label htmlFor="file">
+            <label htmlFor={editing ? "image" : "file"}>
               <HiOutlinePhotograph size={20} />
             </label>
           </div>
@@ -145,7 +151,7 @@ export const PostForm = () => {
         <Button
           disabled={status === "loading"}
           loading={status === "loading"}
-          text="Post"
+          text={editing ? "Save" : "Post"}
           clickHandler={handleSubmit}
           btnStyle="btn btn-primary"
         />

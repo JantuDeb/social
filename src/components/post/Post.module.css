@@ -76,6 +76,47 @@
     font-size: 0.9rem;
 }
 
-.description{
+.description {
     padding: 0.5rem 0;
+}
+
+.actionMenuContainer {
+    position: relative;
+}
+.actionMenuContainer button{
+    padding: 0.5rem;
+}
+.actionMenuButtons {
+    display: flex;
+    position: absolute;
+    top: -0.5rem;
+    right: 0;
+    align-items: flex-start;
+    gap: 0.2rem;
+    flex-direction: column;
+    background-color: var(--color-white);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.actionMenuButtons button{
+    padding: 0.2rem 0.4rem;
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+}
+
+.modalHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.btnClose{
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem;
+    cursor: pointer;
 }

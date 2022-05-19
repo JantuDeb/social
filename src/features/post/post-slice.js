@@ -62,6 +62,19 @@ export const createPost = createAsyncThunk("post/createPost", async (post) => {
     return Promise.reject(error);
   }
 });
+export const editPost = createAsyncThunk(
+  "post/editPost",
+  async ({ post, postId }) => {
+    try {
+      const { data } = await axios.put("/post/" + postId, post, axiosConfig);
+      if (data.success) {
+        return data.post;
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+);
 
 export const deletePost = createAsyncThunk(
   "post/deletePost",
@@ -129,6 +142,20 @@ export const postSlice = createSlice({
     [createPost.rejected]: (state, action) => {
       state.postCreateStatus = "failed";
     },
+
+    [editPost.fulfilled]: (state, action) => {
+      state.feeds = state.feeds.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
+      state.postCreateStatus = "succeeded";
+    },
+    [createPost.pending]: (state, action) => {
+      state.postCreateStatus = "loading";
+    },
+    [createPost.rejected]: (state, action) => {
+      state.postCreateStatus = "failed";
+    },
+
     [fetchAllPosts.fulfilled]: (state, action) => {
       state.posts = action.payload;
     },

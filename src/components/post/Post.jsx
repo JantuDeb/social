@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { BiBookmark } from "react-icons/bi";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
+import { IoCloseSharp } from "react-icons/io5";
+
 import {
   AiOutlineHeart,
   AiOutlineMessage,
@@ -25,9 +29,13 @@ import {
 } from "../../features/comment/comment-slice";
 import { CommentForm } from "../comment/CommentForm";
 import { formatDate } from "../../utils/utils";
+import { Modal } from "../shared/Modal";
+import {PostForm} from "../forms/PostForm"
 
 export const Post = ({ post, bookmark = false }) => {
   const [showComments, setShowComments] = useState(false);
+  const [showActionMenu, setShowActionMenu] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchComments(post._id));
@@ -53,69 +61,114 @@ export const Post = ({ post, bookmark = false }) => {
     setShowComments(true);
   };
 
+  const hideActionmenu = (e) => {
+    if (e.target.tagName === "DIV") {
+      setShowActionMenu(false);
+    }
+  };
   return (
-    post && (
-      <div className={styles.post}>
-        <div className={styles.head}>
-          <Link
-            to={`/home/profile/${post?.user?._id}`}
-            className={styles.profile}
-          >
-            <div className={styles.profileImg}>
-              <img src={post?.user?.photo?.secure_url} alt="profile" />
-            </div>
-            <div className={styles.profileHandle}>
-              <h4>{post?.user?.name}</h4>
-              <p className="text-gray">
-                {post?.user?.location}, {formatDate(post.createdAt)}
-              </p>
-            </div>
-          </Link>
-          {post.user._id === user._id && (
-            <button
-              className="transparent"
-              onClick={() => dispatch(deletePost(post._id))}
+    <>
+      {post && (
+        <div className={styles.post} onClick={hideActionmenu}>
+          <div className={styles.head}>
+            <Link
+              to={`/home/profile/${post?.user?._id}`}
+              className={styles.profile}
             >
-              <MdDeleteOutline size={20} />
-            </button>
+              <div className={styles.profileImg}>
+                <img src={post?.user?.photo?.secure_url} alt="profile" />
+              </div>
+              <div className={styles.profileHandle}>
+                <h4>{post?.user?.name}</h4>
+                <p className="text-gray">
+                  {post?.user?.location}, {formatDate(post.createdAt)}
+                </p>
+              </div>
+            </Link>
+            {post.user._id === user._id && (
+              <div className={styles.actionMenuContainer}>
+                <button
+                  className="transparent"
+                  onClick={() => setShowActionMenu(true)}
+                >
+                  <BsThreeDotsVertical size={20} />
+                </button>
+                {showActionMenu && (
+                  <div className={styles.actionMenuButtons}>
+                    <button
+                      className="transparent"
+                      onClick={() => {
+                        setShowActionMenu(false);
+                        setShowEditModal(true);
+                      }}
+                    >
+                      <FiEdit size={20} /> Edit
+                    </button>
+                    <button
+                      className="transparent"
+                      onClick={() => dispatch(deletePost(post._id))}
+                    >
+                      <MdDeleteOutline size={20} />
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          {post?.image?.url && (
+            <div className={styles.media}>
+              <img src={post?.image?.url} alt="post" />
+            </div>
           )}
-        </div>
-        {post?.image?.url && (
-          <div className={styles.media}>
-            <img src={post?.image?.url} alt="post" />
+          <div className={styles.description}>
+            <p>{post?.description}</p>
+            <p className={styles.tags}>
+              {post?.tags?.map((tag, index) => (
+                <span key={index}>{tag}</span>
+              ))}
+            </p>
           </div>
-        )}
-        <div className={styles.description}>
-          <p>{post?.description}</p>
-          <p className={styles.tags}>
-            {post?.tags?.map((tag,index) => (
-              <span key={index}>{tag}</span>
-            ))}
-          </p>
-        </div>
-        <div className={styles.actionButtons}>
-          <div className={styles.actionButtonRight}>
-            <button className="transparent" onClick={likeClikeHandler}>
-              <AiOutlineHeart size={20} color={isLiked ? "red" : "black"} />
+          <div className={styles.actionButtons}>
+            <div className={styles.actionButtonRight}>
+              <button className="transparent" onClick={likeClikeHandler}>
+                <AiOutlineHeart size={20} color={isLiked ? "red" : "black"} />
+              </button>
+              <button
+                className="transparent"
+                onClick={() => setShowComments((v) => !v)}
+              >
+                <AiOutlineMessage size={20} />
+              </button>
+              <AiOutlineShareAlt size={20} />
+            </div>
+            <button className="transparent" onClick={handleBookmarkClick}>
+              <BiBookmark
+                size={20}
+                color={bookmark || isbookMarked ? "#2563eb" : ""}
+              />
             </button>
-            <button
-              className="transparent"
-              onClick={() => setShowComments((v) => !v)}
-            >
-              <AiOutlineMessage size={20} />
-            </button>
-            <AiOutlineShareAlt size={20} />
           </div>
-          <button className="transparent" onClick={handleBookmarkClick}>
-            <BiBookmark
-              size={20}
-              color={bookmark || isbookMarked ? "#2563eb" : ""}
-            />
-          </button>
+          <CommentForm handleSubmit={addCommentHandler} />
+          {showComments && <Comments postId={post._id} />}
         </div>
-        <CommentForm handleSubmit={addCommentHandler} />
-        {showComments && <Comments postId={post._id} />}
-      </div>
-    )
+      )}
+      {showEditModal && (
+        <Modal setShowModal={setShowEditModal}>
+          <div>
+            <div className={styles.modalHeader}>
+              <h2>Edit Post</h2>
+              <button
+                className={styles.btnClose}
+                onClick={() => setShowEditModal(false)}
+              >
+                <IoCloseSharp size={25} />
+              </button>
+            </div>
+            <PostForm post={post} closeModal={setShowEditModal} editing />
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
