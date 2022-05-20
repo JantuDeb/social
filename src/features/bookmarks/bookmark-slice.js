@@ -63,7 +63,7 @@ export const bookmarkSlice = createSlice({
   extraReducers: {
     [fetchBookmarks.fulfilled]: (state, action) => {
       state.bookmarks = action.payload;
-      state.feedFetchStatus = "succeeded";
+      state.bookmarkFetchStatus = "succeeded";
       state.bookmarkFetchError = "";
     },
     [fetchBookmarks.rejected]: (state, action) => {

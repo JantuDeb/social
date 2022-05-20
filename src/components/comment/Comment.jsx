@@ -60,7 +60,7 @@ export const Comment = ({ comment, comments }) => {
               )}
               {canModify && (
                 <>
-                  <button>Edit</button>
+                  {/* <button>Edit</button> */}
                   <button onClick={handleDelete}>Delete</button>
                 </>
               )}

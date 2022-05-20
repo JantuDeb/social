@@ -14,7 +14,7 @@ export const Navbar = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <h2>Social</h2>
-        <div className={styles.searchBar}>
+        {/* <div className={styles.searchBar}>
           <FcSearch size={20} />
           <input
             type="text"
@@ -22,7 +22,7 @@ export const Navbar = () => {
             placeholder="Search for a friend or post"
             className={styles.inputSearch}
           />
-        </div>
+        </div> */}
 
         <div className={styles.create}>
           <button

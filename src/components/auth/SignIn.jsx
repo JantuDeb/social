@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./SignIn.module.css";
 import { FaUserLock } from "react-icons/fa";
 import { IoMailOpenOutline } from "react-icons/io5";
-import { BsFacebook, BsGoogle, BsTwitter } from "react-icons/bs";
+// import { BsFacebook, BsGoogle, BsTwitter } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/auth-slice";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export const SignIn = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const status = useSelector((state) => state.auth.loginStatus);
+  const {loginStatus:status, loginError} = useSelector((state) => state.auth);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -59,12 +59,12 @@ export const SignIn = () => {
         loading={status === "loading"}
         disabled={status === "loading"}
       />
-      <p className={styles.socialText}>Or Sign in with social platforms</p>
-      <div className={styles.social}>
+      <p className={styles.error}>{loginError}</p>
+      {/* <div className={styles.social}>
         <BsFacebook size={30} />
         <BsGoogle size={30} />
         <BsTwitter size={30} />
-      </div>
+      </div> */}
     </form>
   );
 };

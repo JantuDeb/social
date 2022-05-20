@@ -7,7 +7,9 @@ const initialState = {
   posts: [],
   userPosts: [],
   feedFetchError: "",
+  postFetchError: "",
   feedFetchStatus: "idle",
+  postFetchStatus: "idle",
   postCreateStatus: "idle",
   postCreateError: "",
   likeStatus: "idle",
@@ -132,6 +134,10 @@ export const postSlice = createSlice({
       state.feedFetchStatus = "loading";
     },
 
+    /**
+     * 
+     * CREATE POST
+     */
     [createPost.fulfilled]: (state, action) => {
       state.feeds.unshift(action.payload);
       state.postCreateStatus = "succeeded";
@@ -143,21 +149,37 @@ export const postSlice = createSlice({
       state.postCreateStatus = "failed";
     },
 
+    /**
+     * 
+     * EDIT POST 
+     */
+
     [editPost.fulfilled]: (state, action) => {
       state.feeds = state.feeds.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
       state.postCreateStatus = "succeeded";
     },
-    [createPost.pending]: (state, action) => {
+    [editPost.pending]: (state, action) => {
       state.postCreateStatus = "loading";
     },
-    [createPost.rejected]: (state, action) => {
+    [editPost.rejected]: (state, action) => {
       state.postCreateStatus = "failed";
     },
 
+    /**
+     * 
+     * FETCH ALL POSTS 
+     */
     [fetchAllPosts.fulfilled]: (state, action) => {
       state.posts = action.payload;
+      state.postFetchStatus= "succeeded";
+    },
+    [fetchAllPosts.pending]: (state, action) => {
+      state.postFetchStatus= "loading";
+    },
+    [fetchAllPosts.rejected]: (state, action) => {
+      state.postFetchStatus= "failed";
     },
 
     [fetchUserPosts.fulfilled]: (state, action) => {
@@ -167,6 +189,11 @@ export const postSlice = createSlice({
       state.userPosts = [];
     },
 
+    
+    /**
+     * 
+     * DELETE POST
+     */
     [deletePost.fulfilled]: (state, action) => {
       state.posts = state.posts.filter(
         (post) => post._id !== action.payload._id
@@ -221,6 +248,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const selectPost = (state) => state.post.posts;
-export const selectFeed = (state) => state.post.feeds;
+export const selectPost = (state) => state.post;
+export const selectFeed = (state) => state.post;
 export default postSlice.reducer;

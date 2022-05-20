@@ -29,8 +29,11 @@
     width: 100%;
 }
 
-.socialText{
-    padding: 0.7rem 0;
+.error {
+    margin: 0.5rem;
+    max-width: 20rem;
+    width: 100%;
+    color: var(--color-danger);
 }
 
 .social{

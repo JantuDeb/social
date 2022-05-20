@@ -8,19 +8,20 @@ const initialState = {
   loginError: "",
   loginStatus: "idle",
   signUpStatus: "idle",
+  signUperror:"",
   updateProfileStatus: "idle",
   updateProfileError: "",
   userProfileData: {},
 };
 
-export const login = createAsyncThunk("auth/login", async (user) => {
+export const login = createAsyncThunk("auth/login", async (user, {rejectWithValue}) => {
   try {
     const { data } = await axios.post("/login", user, axiosConfig);
     if (data.success) {
       return data.user;
     }
   } catch (error) {
-    return Promise.reject(error);
+    return rejectWithValue(error?.response?.data);
   }
 });
 
@@ -35,16 +36,20 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   }
 });
 
-export const signup = createAsyncThunk("auth/signup", async (user) => {
-  try {
-    const { data } = await axios.post("/signup", user, axiosConfig);
-    if (data.success) {
-      return data.user;
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/signup", user, axiosConfig);
+      if (data.success) {
+        return data.user;
+      }
+    } catch (error) {
+     return rejectWithValue(error?.response?.data);
     }
-  } catch (error) {
-    return Promise.reject(error);
   }
-});
+);
+
 export const getUser = createAsyncThunk("user/getUser", async (userId) => {
   try {
     const { data } = await axios.get("/user/" + userId, axiosConfig);
@@ -83,13 +88,15 @@ export const authState = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
       state.loginStatus = "succeeded";
+      state.loginError=""
     },
     [login.rejected]: (state, action) => {
       state.loginStatus = "failed";
-      state.loginError = action.payload;
+      state.loginError = action.payload.message;
     },
     [login.pending]: (state, action) => {
       state.loginStatus = "loading";
+      state.loginError= ""
     },
     [logout.fulfilled]: (state, action) => {
       state.loginStatus = "idle";
@@ -111,12 +118,15 @@ export const authState = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
       state.signUpStatus = "succeeded";
+      state.signUperror = ""
     },
     [signup.pending]: (state, action) => {
       state.signUpStatus = "loading";
+      state.signUperror = ""
     },
     [signup.rejected]: (state, action) => {
       state.signUpStatus = "failed";
+      state.signUperror = action.payload.message
     },
     [getUser.fulfilled]: (state, action) => {
       state.userProfileData = action.payload;

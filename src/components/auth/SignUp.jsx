@@ -16,7 +16,7 @@ export const SignUp = () => {
     password: "",
   });
 
-  const status = useSelector((state) => state.auth.signUpStatus);
+  const {signUpStatus:status, signUperror} = useSelector((state) => state.auth);
 
   const inputChangeHandler = (e) => {
     setUserData((data) => ({ ...data, [e.target.name]: e.target.value }));
@@ -82,12 +82,12 @@ export const SignUp = () => {
         disabled={status === "loading"}
       />
 
-      <p className={styles.socialText}>Or Sign in with social platforms</p>
-      <div className={styles.social}>
+      <p className={styles.error}>{signUperror}</p>
+      {/* <div className={styles.social}>
         <BsFacebook size={30} />
         <BsGoogle size={30} />
         <BsTwitter size={30} />
-      </div>
+      </div> */}
     </form>
   );
 };

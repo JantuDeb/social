@@ -2,7 +2,6 @@
     background-color: var(--color-white);
     border-radius: var(--card-border-radius);
     padding: var(--card-padding);
-    margin-top: 1rem;
     position: relative;
 }
 

@@ -35,6 +35,7 @@
 .leftListItem {
     padding: 0.8rem 0;
     display: flex;
+    padding: 1rem;
     cursor: pointer;
     transition: all 300ms ease;
     align-items: center;
@@ -55,7 +56,6 @@
     color: var(--color-dark);
 }
 .leftListItem svg{
-    margin-left: 1.4rem;
     color: var(--color-gray);
 }
 
@@ -93,7 +93,7 @@
 
 @media screen and (max-width: 1024px) {
     .left {
-        width: 5rem;
+        width: 4rem;
         z-index: 5;
     }
     .profile{
@@ -106,8 +106,19 @@
 }
 
 
-@media screen and (max-width:800px){
+@media screen and (max-width:840px){
     .discover{
         display: flex;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .leftListItem{
+        padding-left: 0;
+        padding-right:0 ;
+        justify-content: center;
+    }
+    .left {
+        width: 2.5rem;
     }
 }

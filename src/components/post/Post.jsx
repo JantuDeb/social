@@ -4,6 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { BiBookmark } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
+import { AiFillHeart } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 
 import {
@@ -30,7 +31,7 @@ import {
 import { CommentForm } from "../comment/CommentForm";
 import { formatDate } from "../../utils/utils";
 import { Modal } from "../shared/Modal";
-import {PostForm} from "../forms/PostForm"
+import { PostForm } from "../forms/PostForm";
 
 export const Post = ({ post, bookmark = false }) => {
   const [showComments, setShowComments] = useState(false);
@@ -132,7 +133,11 @@ export const Post = ({ post, bookmark = false }) => {
           <div className={styles.actionButtons}>
             <div className={styles.actionButtonRight}>
               <button className="transparent" onClick={likeClikeHandler}>
-                <AiOutlineHeart size={20} color={isLiked ? "red" : "black"} />
+                {isLiked ? (
+                  <AiFillHeart size={20} color="red" />
+                ) : (
+                  <AiOutlineHeart size={20} />
+                )}
               </button>
               <button
                 className="transparent"

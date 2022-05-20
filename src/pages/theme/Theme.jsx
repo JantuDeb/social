@@ -65,7 +65,7 @@ export const Theme = () => {
                 }}
                 className={`${styles[bg]} ${mode === bg ? "active" : ""}`}
               >
-                <span className={styles.circle}></span>
+                {/* <span className={styles.circle}></span> */}
                 <h5>{title}</h5>
               </div>
             );

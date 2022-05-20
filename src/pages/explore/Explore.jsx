@@ -5,6 +5,7 @@ import { fetchAllPosts, selectPost } from "../../features/post/post-slice";
 import { getSortedPosts } from "../../utils/utils";
 import styles from "./Explore.module.css";
 import { sortReducer } from "./sort-reducer";
+import { Loader } from "../../components/loader/Loader";
 
 export const Explore = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export const Explore = () => {
     dispatch(fetchAllPosts());
   }, [dispatch]);
 
-  const posts = useSelector(selectPost);
+  const { posts, postFetchStatus } = useSelector(selectPost);
 
   const [state, sortDispatch] = useReducer(sortReducer, {
     sortBy: "new",
@@ -25,7 +26,9 @@ export const Explore = () => {
 
   const sortedPosts = getSortedPosts(posts, state);
 
-  return (
+  return postFetchStatus === "loading" ? (
+    <Loader />
+  ) : (
     <div className={styles.posts}>
       <div className={styles.sort}>
         <p>Sort by: </p>
@@ -35,9 +38,9 @@ export const Explore = () => {
           <option> Trending </option>
         </select>
       </div>
-      {sortedPosts.map((post) => {
-        return <Post key={post._id} post={post} />;
-      })}
+      {sortedPosts.map((post) => (
+        <Post key={post._id} post={post} />
+      ))}
     </div>
   );
 };

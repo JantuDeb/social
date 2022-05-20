@@ -71,7 +71,7 @@ export const SidebarLeft = () => {
           })}
         </ul>
       </div>
-      <button className={`${styles.btnCreate} btn btn-primary`}>Create</button>
+      {/* <button className={`${styles.btnCreate} btn btn-primary`}>Create</button> */}
     </aside>
   );
 };

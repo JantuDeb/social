@@ -32,7 +32,6 @@ export const SidebarRight = () => {
         "/search_users?username=" + text,
         axiosConfig
       );
-      console.log(data.users);
       searchDispatch({
         type: "SET_USER",
         payload: {

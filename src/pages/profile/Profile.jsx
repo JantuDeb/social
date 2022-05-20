@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsLink45Deg } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { Post } from "../../components/post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPosts } from "../../features/post/post-slice";
@@ -86,14 +86,14 @@ export const Profile = () => {
             </div>
 
             <div className={styles.follow}>
-              <Link to="/followers">
+              <div to="/followers">
                 {userToShow?.followers?.length}
                 <span className="text-gray">Followers</span>
-              </Link>
-              <Link to="/following">
+              </div>
+              <div to="/following">
                 {userToShow?.followings?.length}
                 <span className="text-gray">Following</span>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
