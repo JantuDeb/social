@@ -8,24 +8,29 @@ const initialState = {
   loginError: "",
   loginStatus: "idle",
   signUpStatus: "idle",
-  signUperror:"",
+  signUperror: "",
   updateProfileStatus: "idle",
   updateProfileError: "",
   userProfileData: {},
 };
 
-export const login = createAsyncThunk("auth/login", async (user, {rejectWithValue}) => {
-  try {
-    const { data } = await axios.post("/login", user, axiosConfig);
-    if (data.success) {
-      return data.user;
+export const login = createAsyncThunk(
+  "auth/login",
+  async (user, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/login", user, axiosConfig);
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        return data.user;
+      }
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
     }
-  } catch (error) {
-    return rejectWithValue(error?.response?.data);
   }
-});
+);
 
 export const logout = createAsyncThunk("auth/logout", async () => {
+  localStorage.removeItem("token");
   try {
     const { data } = await axios.get("/logout", axiosConfig);
     if (data.success) {
@@ -42,10 +47,11 @@ export const signup = createAsyncThunk(
     try {
       const { data } = await axios.post("/signup", user, axiosConfig);
       if (data.success) {
+        localStorage.setItem("token", data.token);
         return data.user;
       }
     } catch (error) {
-     return rejectWithValue(error?.response?.data);
+      return rejectWithValue(error?.response?.data);
     }
   }
 );
@@ -79,6 +85,17 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
+export const getProfile = createAsyncThunk("auth/getProfile", async () => {
+  try {
+    const { data } = await axios.get("/user/profile", axiosConfig);
+    if (data.success) {
+      return data.user;
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+});
+
 export const authState = createSlice({
   name: "auth",
   initialState,
@@ -88,7 +105,7 @@ export const authState = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
       state.loginStatus = "succeeded";
-      state.loginError=""
+      state.loginError = "";
     },
     [login.rejected]: (state, action) => {
       state.loginStatus = "failed";
@@ -96,7 +113,7 @@ export const authState = createSlice({
     },
     [login.pending]: (state, action) => {
       state.loginStatus = "loading";
-      state.loginError= ""
+      state.loginError = "";
     },
     [logout.fulfilled]: (state, action) => {
       state.loginStatus = "idle";
@@ -118,18 +135,22 @@ export const authState = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
       state.signUpStatus = "succeeded";
-      state.signUperror = ""
+      state.signUperror = "";
     },
     [signup.pending]: (state, action) => {
       state.signUpStatus = "loading";
-      state.signUperror = ""
+      state.signUperror = "";
     },
     [signup.rejected]: (state, action) => {
       state.signUpStatus = "failed";
-      state.signUperror = action.payload.message
+      state.signUperror = action.payload.message;
     },
     [getUser.fulfilled]: (state, action) => {
       state.userProfileData = action.payload;
+    },
+    [getProfile.fulfilled]: (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true
     },
   },
 });
