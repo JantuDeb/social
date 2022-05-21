@@ -27,3 +27,55 @@
   - Login 
   - Signup
   - Logout
+
+# How to Install and Run this Project
+Clone or fork this repository to run this locally and use the following commands.
+
+```bash
+git clone https://github.com/JantuDeb/ionvu-social-connect.git
+
+cd ionvu-store 
+
+npm install
+
+npm start
+
+```
+`src/utils/axios-instance.js`
+
+*use the bellow configuration for axios*
+```js
+    const defaultConfig = {
+    baseURL: " https://social-media-backendapi.herokuapp.com/api/v1/"
+    headers: {
+        "Content-Type": "application/json",
+    },
+    withCredentials: true,
+    };
+```
+
+# How to use and customize backend api
+> [GitHub Repository for backend api](https://github.com/JantuDeb/social-api.git)
+
+`.env` 
+```
+PORT=4000
+JWT_SECRET=secret
+JWT_EXPIRY=3d
+MONGO_URL=<mongodb url>
+CLOUDINARY_URL=<cloudinary url>
+CLOUDINARY_NAME=<cloudinary name>
+CLOUDINARY_API_KEY= <your api key>
+CLOUDINARY_API_SECRET=<your secret key>
+```
+>You have to create a mongodb cluster at MOngodb Atlas and a cloudinary account for storing images and video
+```bash
+git clone https://github.com/JantuDeb/social-api.git
+
+cd social-api
+
+npm install
+
+npm start
+
+```
