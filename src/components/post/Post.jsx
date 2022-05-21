@@ -139,7 +139,7 @@ export const Post = ({ post, bookmark = false }) => {
               >
                 <AiOutlineMessage size={20} />
               </button>
-              <AiOutlineShareAlt size={20} />
+              {/* <AiOutlineShareAlt size={20} /> */}
             </div>
             <button className="transparent" onClick={handleBookmarkClick}>
               <BiBookmark

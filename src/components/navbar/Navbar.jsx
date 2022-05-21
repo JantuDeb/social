@@ -19,7 +19,7 @@ export const Navbar = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <h2>Social</h2>
+        <h2>iONVU Connect</h2>
         {/* <div className={styles.searchBar}>
           <FcSearch size={20} />
           <input

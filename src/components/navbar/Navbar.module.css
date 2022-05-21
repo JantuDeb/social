@@ -15,6 +15,9 @@
     margin: 0 auto;
 }
 
+.container h2{
+    color: var(--color-primary);
+}
 .searchBar{
     display: flex;
     background-color: var(--color-light);
