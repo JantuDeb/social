@@ -4,4 +4,7 @@ export const axiosConfig = {
       ? "http://localhost:4000/api/v1/"
       : "https://social-media-backendapi.herokuapp.com/api/v1/",
   withCredentials: true,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
 };

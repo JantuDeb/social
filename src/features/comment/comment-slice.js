@@ -8,7 +8,10 @@ const initialState = {
 
 export const fetchComments = createAsyncThunk(
   "comment/fetchComment",
-  async (postId) => {
+  async (_, { getState }) => {
+    const state = getState();
+    const comments = state.comment.comments;
+    if (comments.length !== 0) return comments;
     try {
       const { data } = await axios.get("/comments", axiosConfig);
       if (data.success) {

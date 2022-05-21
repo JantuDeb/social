@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { BiBookmark } from "react-icons/bi";
@@ -24,10 +24,7 @@ import {
   likePost,
 } from "../../features/post/post-slice";
 import { Comments } from "../comment/Comments";
-import {
-  addComment,
-  fetchComments,
-} from "../../features/comment/comment-slice";
+import { addComment } from "../../features/comment/comment-slice";
 import { CommentForm } from "../comment/CommentForm";
 import { formatDate } from "../../utils/utils";
 import { Modal } from "../shared/Modal";
@@ -38,9 +35,6 @@ export const Post = ({ post, bookmark = false }) => {
   const [showActionMenu, setShowActionMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchComments(post._id));
-  }, [dispatch, post._id]);
 
   const user = useSelector((state) => state.auth.user);
   const bookmarks = useSelector((state) => state.bookmark.bookmarks);

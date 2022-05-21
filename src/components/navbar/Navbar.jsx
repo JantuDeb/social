@@ -1,14 +1,20 @@
 import React from "react";
 import styles from "./Navbar.module.css";
-import { FcSearch } from "react-icons/fc";
+// import { FcSearch } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/auth-slice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logout());
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await dispatch(logout()).unwrap();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <header className={styles.header}>

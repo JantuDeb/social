@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { SignIn } from "./components/auth/SignIn";
 import { SignUp } from "./components/auth/SignUp";
@@ -5,6 +7,7 @@ import { Feed } from "./components/feed/Feed";
 import PrivateRoute from "./components/shared/PrivateRoute";
 import { SidebarRight } from "./components/sidebar/SidebarRight";
 import { ThemeProvider } from "./context/ThemeContext";
+import { getProfile } from "./features/auth/auth-slice";
 import { Auth } from "./pages/auth/Auth";
 import { Bookmark } from "./pages/bookmark/Bookmark";
 // import { Chats } from "./pages/chats/Chats";
@@ -14,6 +17,14 @@ import { Profile } from "./pages/profile/Profile";
 import { Theme } from "./pages/theme/Theme";
 
 export const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
+
   return (
     <ThemeProvider>
       <Routes>

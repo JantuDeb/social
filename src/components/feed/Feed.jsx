@@ -6,10 +6,13 @@ import { Post } from "../post/Post";
 import styles from "./Feed.module.css";
 import { PostForm } from "../forms/PostForm";
 import { Loader } from "../loader/Loader";
+import { fetchComments } from "../../features/comment/comment-slice";
+
 export const Feed = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFeed());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   const { feeds, feedFetchStatus } = useSelector(selectFeed);
