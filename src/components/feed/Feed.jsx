@@ -7,11 +7,13 @@ import styles from "./Feed.module.css";
 import { PostForm } from "../forms/PostForm";
 import { Loader } from "../loader/Loader";
 import { fetchComments } from "../../features/comment/comment-slice";
+import { fetchBookmarks } from "../../features/bookmarks/bookmark-slice";
 export const Feed = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFeed());
     dispatch(fetchComments());
+    dispatch(fetchBookmarks());
   }, [dispatch]);
 
   const { feeds, feedFetchStatus } = useSelector(selectFeed);
