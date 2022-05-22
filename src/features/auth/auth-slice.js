@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosConfig } from "../../config/axios-config";
+import { follow, unFollow } from "../followers/followers-slice";
 
 const initialState = {
   user: {},
@@ -57,6 +58,7 @@ export const signup = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk("user/getUser", async (userId) => {
+  console.log("getUser");
   try {
     const { data } = await axios.get("/user/" + userId, axiosConfig);
     if (data.success) {
@@ -150,7 +152,31 @@ export const authState = createSlice({
     },
     [getProfile.fulfilled]: (state, action) => {
       state.user = action.payload;
-      state.isLoggedIn = true
+      state.isLoggedIn = true;
+    },
+
+    [follow.fulfilled]: (state, action) => {
+      if (state.user._id === state.userProfileData._id) {
+        state.user.followings.push(action.payload._id);
+      } else if (state.userProfileData._id === action.payload._id)
+        state.userProfileData.followers.push(action.payload._id);
+    },
+    [unFollow.fulfilled]: (state, action) => {
+      if (state.user._id === state.userProfileData._id) {
+        state.user = {
+          ...state.user,
+          followings: state.user.followings.filter(
+            (id) => id !== action.payload._id
+          ),
+        };
+      } else if (state.userProfileData._id === action.payload._id) {
+        state.userProfileData = {
+          ...state.userProfileData,
+          followers: state.userProfileData.followers.filter(
+            (id) => id !== action.payload._id
+          ),
+        };
+      }
     },
   },
 });

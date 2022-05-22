@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsLink45Deg } from "react-icons/bs";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Post } from "../../components/post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPosts } from "../../features/post/post-slice";
 import { Modal } from "../../components/shared/Modal";
 import { EditProfileForm } from "../../components/forms/EditProfileForm";
 import { follow, unFollow } from "../../features/followers/followers-slice";
-import { getUser } from "../../features/auth/auth-slice";
+import { getProfile, getUser } from "../../features/auth/auth-slice";
 
 export const Profile = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,6 +19,7 @@ export const Profile = () => {
   useEffect(() => {
     dispatch(fetchUserPosts(userId));
     dispatch(getUser(userId));
+    dispatch(getProfile());
   }, [dispatch, userId]);
 
   const currentUser = useSelector((state) => state.auth.user);
@@ -33,7 +34,7 @@ export const Profile = () => {
     if (isFollowing) dispatch(unFollow(userId));
     else dispatch(follow(userId));
   };
-  
+
   return (
     <>
       <div className={styles.profile}>

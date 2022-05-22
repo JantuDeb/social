@@ -7,11 +7,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiFillHeart } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 
-import {
-  AiOutlineHeart,
-  AiOutlineMessage,
-  AiOutlineShareAlt,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import styles from "./Post.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -30,7 +26,7 @@ import { formatDate } from "../../utils/utils";
 import { Modal } from "../shared/Modal";
 import { PostForm } from "../forms/PostForm";
 
-export const Post = ({ post, bookmark = false }) => {
+export const Post = ({ post }) => {
   const [showComments, setShowComments] = useState(false);
   const [showActionMenu, setShowActionMenu] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -40,8 +36,9 @@ export const Post = ({ post, bookmark = false }) => {
   const bookmarks = useSelector((state) => state.bookmark.bookmarks);
 
   const handleBookmarkClick = () => {
-    if (bookmark) dispatch(removeBookmarks(post._id));
+    if (isbookMarked) dispatch(removeBookmarks(post._id));
     else dispatch(addToBookmarks(post._id));
+    console.log(bookmarks);
   };
 
   const isLiked = post.likes.includes(user._id);
@@ -49,6 +46,7 @@ export const Post = ({ post, bookmark = false }) => {
   const likeClikeHandler = () => {
     if (!isLiked) dispatch(likePost(post._id));
     else dispatch(disLikePost(post._id));
+    console.log(post.likes);
   };
 
   const addCommentHandler = (text) => {
@@ -144,7 +142,7 @@ export const Post = ({ post, bookmark = false }) => {
             <button className="transparent" onClick={handleBookmarkClick}>
               <BiBookmark
                 size={20}
-                color={bookmark || isbookMarked ? "#2563eb" : ""}
+                color={isbookMarked || isbookMarked ? "#2563eb" : ""}
               />
             </button>
           </div>

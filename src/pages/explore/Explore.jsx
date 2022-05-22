@@ -6,11 +6,13 @@ import { getSortedPosts } from "../../utils/utils";
 import styles from "./Explore.module.css";
 import { sortReducer } from "./sort-reducer";
 import { Loader } from "../../components/loader/Loader";
+import { fetchComments } from "../../features/comment/comment-slice";
 
 export const Explore = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllPosts());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   const { posts, postFetchStatus } = useSelector(selectPost);

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosConfig } from "../../config/axios-config";
+import { disLikePost, likePost } from "../post/post-slice";
 
 const initialState = {
   bookmarks: [],
@@ -75,12 +76,40 @@ export const bookmarkSlice = createSlice({
       state.bookmarkFetchError = "";
     },
     [addToBookmarks.fulfilled]: (state, action) => {
-      state.bookmarks.concat(action.payload);
+      console.log(action.payload);
+      state.bookmarks.push(action.payload);
     },
     [removeBookmarks.fulfilled]: (state, action) => {
       state.bookmarks = state.bookmarks.filter(
         (bookmark) => bookmark._id !== action.payload._id
       );
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.bookmarks = state.bookmarks.map((bookmark) => {
+        if (bookmark.post._id === action.payload._id) {
+          return {
+            ...bookmark,
+            post: action.payload,
+          };
+        }
+        return bookmark;
+      });
+    },
+    [disLikePost.fulfilled]: (state, action) => {
+      state.bookmarks = state.bookmarks.map((bookmark) => {
+        if (bookmark.post._id === action.payload.post) {
+          return {
+            ...bookmark,
+            post: {
+              ...bookmark.post,
+              likes: bookmark.post.likes.filter(
+                (like) => like !== action.payload.user
+              ),
+            },
+          };
+        }
+        return bookmark;
+      });
     },
   },
 });
