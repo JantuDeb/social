@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDeleteOutline } from "react-icons/md";
 import { BiBookmark } from "react-icons/bi";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { BsThreeDotsVertical,BsFillBookmarkCheckFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { AiFillHeart } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
-
 import { AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 import styles from "./Post.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -140,10 +139,11 @@ export const Post = ({ post }) => {
               {/* <AiOutlineShareAlt size={20} /> */}
             </div>
             <button className="transparent" onClick={handleBookmarkClick}>
-              <BiBookmark
-                size={20}
-                color={isbookMarked || isbookMarked ? "#2563eb" : ""}
-              />
+              {isbookMarked ? (
+                <BsFillBookmarkCheckFill size={20} color="#2563eb" />
+              ) : (
+                <BiBookmark size={20} />
+              )}
             </button>
           </div>
           <CommentForm handleSubmit={addCommentHandler} />

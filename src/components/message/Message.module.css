@@ -1,0 +1,39 @@
+.message {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.profileImg {
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.text {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: var(--card-padding);
+}
+
+.ownMessage .profileImg {
+    display: none;
+}
+
+.ownMessage {
+    justify-content: flex-end;
+}
+
+.text.ownText {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 0rem;
+
+}

@@ -222,6 +222,9 @@ export const postSlice = createSlice({
       state.posts = state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
+      state.userPosts = state.userPosts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
       state.likeStatus = "succeeded";
     },
     [disLikePost.fulfilled]: (state, action) => {
@@ -235,6 +238,15 @@ export const postSlice = createSlice({
         return post;
       });
       state.posts = state.posts.map((post) => {
+        if (post._id === action.payload.post) {
+          return {
+            ...post,
+            likes: post.likes.filter((like) => like !== action.payload.user),
+          };
+        }
+        return post;
+      });
+      state.userPosts = state.userPosts.map((post) => {
         if (post._id === action.payload.post) {
           return {
             ...post,

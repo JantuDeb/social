@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: var(--color-white);
     align-items: center;
     min-height: 100vh;
 }
@@ -12,6 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  
 }
 
 .links {
@@ -26,8 +28,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
+    min-height: 27rem;
+    background-color: var(--color-light);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
 }
 
 .links a {
@@ -35,4 +41,16 @@
     color: var(--color-dark);
     margin-bottom: 0.6rem;
 
+}
+
+.pannels{
+    width: 25rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+.pannels h1{
+    color: var(--color-primary);
+    font-size: xx-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
