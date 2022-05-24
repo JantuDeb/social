@@ -1,7 +1,6 @@
 import styles from "./SignUp.module.css";
 import { FaUser, FaUserLock } from "react-icons/fa";
 import { IoMailOpenOutline } from "react-icons/io5";
-import { BsFacebook, BsGoogle, BsTwitter } from "react-icons/bs";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../features/auth/auth-slice";

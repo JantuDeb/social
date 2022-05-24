@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./SidebarLeft.module.css";
-import { BiEnvelope } from "react-icons/bi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 import { RiPaletteLine } from "react-icons/ri";
-import { AiOutlineHome, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { VscCompass } from "react-icons/vsc";
 import { BsFillJournalBookmarkFill } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
