@@ -1,4 +1,4 @@
-# https://ionvuconnect.netlify.app/ - This is a social media app where you can post your thoughts and follow each other to communicate
+# - This is a social media app where you can post your thoughts and follow each other to communicate
 
 
 ![image](https://user-images.githubusercontent.com/63020886/169635770-4d975262-27b8-4cfa-84d8-34fdc75e2d83.png)
